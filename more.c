@@ -109,9 +109,8 @@ int main(int argc , char *argv[]){
    if (argc == 1){
        printf("more: bad usage\nTry 'more --help' for more information.\n");
        exit (0);
-   }
-   int i=1;
-
+   }int i=1;
+   
    while(1){
    FILE * fp;
    fp = fopen(argv[i] , "r");
