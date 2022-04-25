@@ -43,16 +43,6 @@ void sort(struct dirent **hold,int size)
         }
     }
 }
-char* concat_flag(char *flag[],int flag_count){
-    if(flag_count==0) return " ";
-    int size=0;
-    for(int i=0;i<flag_count;i++) size+=strlen(flag[i]); 
-    char *src= malloc(size); strncpy(src,flag[0],strlen(flag[0]));
-    for(int i=1;i<flag_count;i++){
-        strncat(src,flag[i],strlen(flag[i]));
-    }
-    return src;
-}
 char* remove_flags(char *argv[],int argc,int *ass){
     int i=1;
     while(i<argc&&argv[i][0]=='-'){
@@ -62,19 +52,26 @@ char* remove_flags(char *argv[],int argc,int *ass){
         }
         i++;
     } 
-    int count=argc-i+1;
- //   printf("%d\n",i-1);
-    *ass=i-1;
-    printf("%d\n",i-1);
-    char** flags=malloc(i-1);
-    for(int x=0;x<i-1;x++) flags[x]=malloc(256);
-   // printf("%d\n",count);
     i=1;
-    while(i<argc&&argv[i][0]=='-'){
-        strncpy(flags[i-1],&argv[i][1],256);
+    int flag_count=0;
+    while(i<argc){
+        if(argv[i][0]=='-') flag_count++;
         i++;
     }
-    return concat_flag(flags,*ass);
+    char *flag=malloc(flag_count*256);
+    i=1;
+    int first=1;
+    while(i<argc){
+        if(argv[i][0]=='-'){
+            if(first){
+                first=0;
+                strncpy(flag,&argv[i][1],256);
+            }
+            else strncat(flag,&argv[i][1],256);
+        } 
+        i++;
+    }
+    return flag;
 }
 char** take_core(char *argv[],int argc,int flag_count){
     int i=1;
@@ -208,8 +205,8 @@ void Handle_flags(struct dirent *hold,char *flag,struct stat s,char ***array,int
 }
 int main(int argc , char *argv[]){
     struct dirent *de;
-    char* name;int flag_count;int cnt;char flag[80];
-    strcpy(flag,remove_flags(argv,argc,&flag_count));cnt=argc-flag_count;
+    char* name;int flag_count;int cnt;
+    char*flag=remove_flags(argv,argc,&flag_count);cnt=argc-flag_count;
     char** soruce=take_core(argv,argc,flag_count);
     
     name=".";

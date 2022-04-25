@@ -1,0 +1,22 @@
+canRead()	 It tests whether the file is readable or not. 	Boolean
+canWrite()	It tests whether the file is writable or not.	Boolean
+createNewFile()	It creates an empty file.	Boolean
+delete()	It deletes a file.	Boolean
+exists()	It tests whether the file exists or not.	Boolean
+length()	Returns the size of the file in bytes.	Long
+getName()	 Returns the name of the file.	String
+list()	Returns an array of the files in the directory.	String[] 
+mkdir()	 Creates a new directory.	Boolean
+getAbsolutePath()	Returns the absolute pathname of the file.	String
+1.	write()	Writes the specified byte to the output stream.
+2.	write(byte[] array)	Writes the bytes which are inside a specific array to the output stream.
+3.	close()	Closes the output stream.
+4.	flush()	Forces to write all the data present in an output stream to the destination.
+1	read()	Reads one byte of data from the input stream.
+2	read(byte[] array)()	Reads byte from the stream and stores that byte in the specified array.
+3	mark()	It marks the position in the input stream until the data has been read.
+4	available()	Returns the number of bytes available in the input stream.
+5	markSupported()	It checks if the mark() method and the reset() method is supported in the stream.
+6	reset()	Returns the control to the point where the mark was set inside the stream.
+7	skips()	 Skips and removes a particular number of bytes from the input stream.
+8	close()	Closes the input stream.
