@@ -20,3 +20,19 @@ getAbsolutePath()	Returns the absolute pathname of the file.	String
 6	reset()	Returns the control to the point where the mark was set inside the stream.
 7	skips()	 Skips and removes a particular number of bytes from the input stream.
 8	close()	Closes the input stream.
+
+FileInputStream fis = new FileInputStream("outputFile");
+ArrayList<Object> objectsList = new ArrayList<>();
+boolean cont = true;
+while (cont) {
+  try (ObjectInputStream input = new ObjectInputStream(fis)) {
+    Object obj = input.readObject();
+    if (obj != null) {
+      objectsList.add(obj);
+    } else {
+      cont = false;
+    }
+  } catch (Exception e) {
+    // System.out.println(e.printStackTrace());
+  }
+}
