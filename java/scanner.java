@@ -4,14 +4,15 @@ import java.lang.Integer;
 public class scanner {
     public static void main(String args[]){
         Scanner x= new Scanner(System.in);
-        int n=x.nextInt();
+        String s=x.next();
         jojo[] array;
         array= new jojo[10];
         for(int i=0;i<array.length;i++){
-            if(i<n)array[i]=new dio();
+            if(i%2==0)array[i]=new dio();
             else array[i]=new jojo();
         }
-        System.out.printf("%d\n",array[9].get_count());
+        x.close();
+        System.out.printf("%d\n",array[0].get_count());
     }
 }
 class jojo{
