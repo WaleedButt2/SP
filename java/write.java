@@ -5,7 +5,7 @@ import java.io.FileWriter;
 // Import the IOException class for handling errors
 import java.io.IOException; 
   
-public class GFG {
+public class write {
     public static void main(String[] args)
     {
         try {
