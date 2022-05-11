@@ -1,6 +1,3 @@
-import java.lang.*;
-import java.io.*;
-import java.util.*;
 public class inheritance {
     static void  poop(){
         new son(3);new daughter();

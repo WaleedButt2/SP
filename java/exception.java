@@ -1,4 +1,4 @@
-import java.lang.*;
+
 import java.io.*;
 import java.util.*;
 public class exception {
@@ -13,10 +13,11 @@ public class exception {
         catch(Throwable e){
             System.out.print(e);
         }
-        System.out.printf("Enter 1 to create file 2 to delete file 3 to read to file 4 to write file 5 to append in a file 6 to quit\n");
-        int choice=in.nextInt();
-        System.out.printf("Enter FileName\n");
-        String FileName=in.next();
+        while(true){
+            System.out.printf("Enter 1 to create file 2 to delete file 3 to read to file 4 to write file 5 to append in a file 6 to quit\n");
+            int choice=in.nextInt();
+            System.out.printf("Enter FileName\n");
+            String FileName=in.next();
         if(choice==1){
             try{
                 File f = new File(FileName);
@@ -92,6 +93,9 @@ public class exception {
                 e.printStackTrace();
             }
         }
+    else if(choice==6) break;
+    }
+    in.close();
     }
 }
 class throwableExceptionDioSpotted extends RuntimeException{
