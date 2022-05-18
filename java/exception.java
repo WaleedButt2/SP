@@ -98,7 +98,16 @@ public class exception {
     in.close();
     }
 }
-class throwableExceptionDioSpotted extends RuntimeException{
+class rowableExceptionDioSpotted extends Throwable{
+    public String toString() {
+        return "fuckker\n";
+    }
+}
+
+class throwableExceptionDioSpotted extends Throwable{
+    throwableExceptionDioSpotted(){
+        
+    }
     public String toString() {
         return "Dio Spotted Please Stay At A Safe Distance\n";
     }
