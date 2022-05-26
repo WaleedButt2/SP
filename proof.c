@@ -6,6 +6,10 @@
 #include <unistd.h>
 #define PAGELENGTH 24
 #define LINELENGTH 100
+// prints extra space thus if space is found in text file does weird things to (--more--)
+// changed while(f!=EOF) to while(fgets()) syntax error
+// removed fgets() used in char c '\n' cause of above error
+// dosent give correct lines
 int main(int argc , char *argv[]){
     if(argc==1) exit(0);
     for(int i=1;i<argc;i++){
@@ -27,14 +31,15 @@ int main(int argc , char *argv[]){
         printf("\033[7m(--more--)\033[m");
         char c;
         Here:
-        while(f){
+        while(fgets(buffer,LINELENGTH,f)){
             c=getchar();printf("\033[2k\033[G");
             if(c=='\n'){
-                fgets(buffer,LINELENGTH,f);
+               // fgets(buffer,LINELENGTH,f);
                 printf("%s",buffer);
             }
             else if(c==' '){
                 x=0;
+                printf("%s",buffer);x++;
                 while(fgets(buffer,LINELENGTH,f)){
                     printf("%s",buffer);x++;
                     if(x==PAGELENGTH-1) break;
