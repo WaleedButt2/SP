@@ -1,0 +1,39 @@
+<html>
+
+<head>
+
+    <script language="JavaScript" type="text/javaScript">
+
+    function validate(){
+        var x=document.pnum.num.value;
+        if (x=="") {alert("empty it is"); return false;}
+       // alert(x);
+        var sum=0;
+        for(let i=1;i<x;i++){
+            if(x%i==0)sum+=i;
+        }
+        if(sum==x)
+        alert("This is a perfect Number");
+        else
+        alert("This is not a perfect Number");
+    }
+    </script>
+</head>
+
+<body>
+    <form name=pnum method=post onsubmit="return validate()">
+        <table>
+            <tr>
+                <p>
+                    <font color=red size=3><b><u>Perfect Numbers</u></b></font>
+                </p>
+            </tr>
+            <tr>
+                <td align="right">Enter Number</td>
+                <td><input type=text name="num" value =""></td>
+            </tr>
+        </table>
+    </form>
+</body>
+
+</html>
