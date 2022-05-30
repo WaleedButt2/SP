@@ -198,7 +198,7 @@ int main(){
         if(pid==0){
             redirect(argv,&argc);
             //printf("%d\n",argc);
-            Print(argv,argc);
+           // Print(argv,argc);
             if(execvp(argv[0],argv)==-1) printf("poop\n");
             for(int i=0;i<=argc;i++) free(argv[i]);
             free(argv);
