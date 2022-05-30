@@ -93,7 +93,7 @@ char* red(FILE* f){
     s[i]='\0';
     return s;
 }
-char *redirect(char** argv,int *argc){
+void redirect(char** argv,int *argc){
     int output_redirect=STDOUT_FILENO;bool o=false;
     int input_redirect=STDIN_FILENO;bool in=false;
     int error_redirect=STDERR_FILENO;bool err=false;
@@ -107,6 +107,7 @@ char *redirect(char** argv,int *argc){
           //  printf("%d\n",found);
         }
     }
+    if(found==0) return;
    //printf("%d\n",found);
     for(int i=0;i<*argc;i++){
         if((strcmp(argv[i],"1>")==0)||(strcmp(argv[i],">")==0)){
@@ -135,6 +136,7 @@ char *redirect(char** argv,int *argc){
             }
         }
     }
+    
     char* filename;
     int f;
     filename=argv[input_redirect];
@@ -143,20 +145,24 @@ char *redirect(char** argv,int *argc){
     }
     //printf("input = %s\noutput = %s\nerror = %s\n",argv[input_redirect],argv[output_redirect],argv[error_redirect]);
     if(in){
-    f=open(filename,O_RDONLY);
-    dup2(f,STDIN_FILENO);}
+        f=open(filename,O_RDONLY);
+        dup2(f,STDIN_FILENO);
+    }
     filename=argv[output_redirect];
     printf("%s\n",filename);
     if(o){
-    f=open(filename,O_CREAT||O_RDWR||O_APPEND);
-    if(f==-1){
-        printf("Error in opening/accessing file\n");exit(0);
+        f=open(filename,O_CREAT||O_RDWR||O_APPEND);
+        if(f==-1){
+            printf("Error in opening/accessing file\n");exit(0);
+        }
+        dup2(f,STDOUT_FILENO);
     }
-    dup2(f,STDOUT_FILENO);}
     filename=argv[error_redirect];
-    if(err){f=open(filename,O_CREAT||O_RDWR||O_APPEND);
-    dup2(f,STDERR_FILENO);}
-    printf("%d\n",f);
+    if(err){
+        f=open(filename,O_CREAT||O_RDWR||O_APPEND);
+        dup2(f,STDERR_FILENO);
+    }
+    //printf("%d\n",f);
     //changing argc and removing redirections from argv
     char** new_argv =malloc(*argc-found+1);
     printf("%d\n",*argc-found+1);
@@ -191,7 +197,8 @@ int main(){
         int pid=fork();
         if(pid==0){
             redirect(argv,&argc);
-            //Print(argv,argc);
+            printf("%d\n",argc);
+            Print(argv,argc);
             if(execvp(argv[0],argv)==-1) printf("poop\n");
             for(int i=0;i<=argc;i++) free(argv[i]);
             free(argv);
